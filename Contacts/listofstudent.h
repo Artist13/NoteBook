@@ -7,15 +7,17 @@
 class ListOfStudent
 {
 public:
-    ListOfStudent();
-    ListOfStudent(ListOfStudent*);
+    //ListOfStudent(ListOfStudent*);
+    static ListOfStudent *GetListOfStudent();
     QString ShowStudents();
     void addStudent(Student*);
     bool Load(const QString);
     bool Save(const QString);
 
     std::vector<Student*> Students;
-    int last_id;
+    int last_id = 0;
+private:
+    ListOfStudent();
 };
 
 #endif // LISTOFSTUDENT_H

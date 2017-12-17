@@ -76,7 +76,7 @@
    <widget class="QPushButton" name="Delete_Order">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>420</x>
       <y>410</y>
       <width>101</width>
       <height>23</height>
@@ -84,6 +84,19 @@
     </property>
     <property name="text">
      <string>Удалить занятие</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="CreateReport">
+    <property name="geometry">
+     <rect>
+      <x>644</x>
+      <y>410</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Создать отчет</string>
     </property>
    </widget>
   </widget>

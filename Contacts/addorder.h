@@ -14,7 +14,7 @@ class AddOrder : public QDialog
 {
     Q_OBJECT
 public:
-    explicit AddOrder(ListOfStudent *myStudents, Order* = 0,QWidget *parent = nullptr);
+    explicit AddOrder(Order* = 0,QWidget *parent = nullptr);
     Order* GetOrder();
     ~AddOrder();
 private:
@@ -22,7 +22,6 @@ private:
     QComboBox *cbSubject;
     QWidget *ui;
     QListWidget *OrderStudent;
-    ListOfStudent *AllStudents;
     Order * currentOrder;
     QLineEdit *leHours;
     void UpdateForm();

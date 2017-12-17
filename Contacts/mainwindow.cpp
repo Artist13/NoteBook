@@ -82,7 +82,7 @@ void MainWindow::UpdateListOfOrder(std::vector<Order*> orders)
 }
 void MainWindow::on_AddOrder_clicked()
 {
-    AddOrder *NewOrder = new AddOrder(MyStudents);
+    AddOrder *NewOrder = new AddOrder();
     if(NewOrder->exec() == QDialog::Accepted)
     {
         MyBook->AddOrder(NewOrder->GetOrder());
@@ -97,7 +97,7 @@ void MainWindow::on_ListOfOrders_doubleClicked(const QModelIndex &index)
     {
         return;
     }
-    AddOrder *Edit = new AddOrder(MyStudents, MyBook->Orders[index.row()]);
+    AddOrder *Edit = new AddOrder(MyBook->Orders[index.row()]);
     if(Edit->exec() == QDialog::Accepted)
     {
         MyBook->Orders[index.row()] = Edit->GetOrder();

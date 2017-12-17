@@ -5,11 +5,12 @@
 #include <QPushButton>
 #include "addstudent.h"
 
+#define MyStudents ListOfStudent::GetListOfStudent()->Students
+
 //
-AddOrder::AddOrder(ListOfStudent *myStudents, Order* order, QWidget *parent) : QDialog(parent)
+AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
 {
     ui = new QWidget();
-    AllStudents = myStudents;
     QGridLayout *OrderLayout = new QGridLayout(ui);
     QLabel *lblDateTime = new QLabel("Дата");
     //Заменить String на выбор предмета из ComboBox
@@ -81,8 +82,6 @@ AddOrder::AddOrder(ListOfStudent *myStudents, Order* order, QWidget *parent) : Q
 
 AddOrder::~AddOrder()
 {
-    delete leDateTime;
-    delete cbSubject;
     delete ui;
 }
 
@@ -100,15 +99,15 @@ void AddOrder::UpdateForm()
 void AddOrder::on_AddStudent_clicked()
 {
     QDialog *StDial = new QDialog();
-    QListWidget *MyStudents = new QListWidget(StDial);
-    foreach (Student* st, AllStudents->Students)
+    QListWidget *myStudents = new QListWidget(StDial);
+    foreach (Student* st, MyStudents)
     {
-        MyStudents->addItem(new QListWidgetItem(st->ShowInfo()));
+        myStudents->addItem(new QListWidgetItem(st->ShowInfo()));
     }
-    connect(MyStudents, SIGNAL(doubleClicked(QModelIndex)), SLOT(on_ListOfStudent_dbclicked(QModelIndex)));
+    connect(myStudents, SIGNAL(doubleClicked(QModelIndex)), SLOT(on_ListOfStudent_dbclicked(QModelIndex)));
     StDial->setModal(true);
     StDial->setMinimumSize(350, 200);
-    MyStudents->setMinimumSize(350, 200);
+    myStudents->setMinimumSize(350, 200);
     StDial->show();
 }
 //Выбор студента из существующего списка
@@ -118,7 +117,7 @@ void AddOrder::on_ListOfStudent_dbclicked(const QModelIndex &index)
     {
         return;
     }
-    currentOrder->Students.push_back(AllStudents->Students[index.row()]);
+    currentOrder->Students.push_back(MyStudents[index.row()]);
     UpdateForm();
 }
 
@@ -130,11 +129,6 @@ void AddOrder::on_Student_dblclicked(const QModelIndex &index)
         return;
     }
     currentOrder->Students.erase(currentOrder->Students.begin() + index.row());
-    /*AddStudent *Edit = new AddStudent(currentOrder->Students[index.row()], this);
-    if(Edit->exec() == QDialog::Accepted)
-    {
-        currentOrder->Students[index.row()] = Edit->GetStudent();
-    }*/
     UpdateForm();
 }
 

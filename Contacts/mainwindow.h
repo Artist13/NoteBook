@@ -20,7 +20,7 @@ public:
     void UpdateListOfOrder(std::vector<Order*>);
 
     BookOfOrder *MyBook;
-    ListOfStudent *MyStudents;
+    //ListOfStudent *MyStudents;
 
 private slots:
     void on_AddPerson_clicked();
@@ -38,6 +38,8 @@ private slots:
     void on_Delete_Student_clicked();
 
     void on_Delete_Order_clicked();
+
+    void on_CreateReport_clicked();
 
 private:
     Ui::MainWindow *ui;
