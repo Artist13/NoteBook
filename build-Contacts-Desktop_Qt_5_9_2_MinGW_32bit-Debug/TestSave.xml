@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Students>
+    <Student name="Ivan" secondName="Ivanov" subject="Inform" classNumber="9" id="1"/>
+    <Student name="Maria" secondName="Sokolova" subject="Inform" classNumber="9" id="2"/>
+    <Student name="ID" secondName="Test" subject="iii" classNumber="9" id="3"/>
+</Students>

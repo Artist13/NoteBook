@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Students>
+    <Student name="Иван" secondName="Иванов" subject="Информатика" classNumber="9" id="1"/>
+    <Student name="Мария" secondName="Соколова" subject="Информатика" classNumber="9" id="2"/>
+    <Student name="Крилл" secondName="Носов" subject="Информатика" classNumber="11" id="3"/>
+    <Student name="Сергей" secondName="Горшков" subject="Информатика" classNumber="9" id="4"/>
+</Students>
