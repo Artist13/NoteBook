@@ -8,12 +8,13 @@
 #include <QFileDialog>
 #include <QVBoxLayout>
 
+#define MyStudents ListOfStudent::GetListOfStudent()
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    MyStudents = new ListOfStudent();
     MyBook = new BookOfOrder(MyStudents);
     MyStudents->Load("TestStudents.xml");
     UpdateList(MyStudents->Students);
@@ -22,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     MyStudents->Save("TestStudents.xml");
-    delete MyStudents;
     delete MyBook;
     delete ui;
 }
@@ -116,4 +116,9 @@ void MainWindow::on_Delete_Order_clicked()
 {
     MyBook->Orders.erase(MyBook->Orders.begin() + ui->ListOfOrders->currentRow());
     UpdateListOfOrder(MyBook->Orders);
+}
+
+void MainWindow::on_CreateReport_clicked()
+{
+
 }

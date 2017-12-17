@@ -114,5 +114,10 @@ bool BookOfOrder::Save(const QString outputFile)
 
 QString BookOfOrder::GetReport()
 {
+    QString temp = "";
+    QString tempOrder = "";
+    for(int i = 0; i < Orders.size(); i++)
+    {
 
+    }
 }

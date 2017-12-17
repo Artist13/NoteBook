@@ -10,14 +10,20 @@ ListOfStudent::ListOfStudent()
     last_id = 0;
 }
 
-ListOfStudent::ListOfStudent(ListOfStudent *myList)
+ListOfStudent* ListOfStudent::GetListOfStudent()
+{
+    static ListOfStudent MyListOfStudents;
+    return &MyListOfStudents;
+}
+
+/*ListOfStudent::ListOfStudent(ListOfStudent *myList)
 {
     this->last_id = myList->last_id;
     foreach (Student* st, myList->Students)
     {
         this->Students.push_back(st);
     }
-}
+}*/
 
 void ListOfStudent::addStudent(Student *student)
 {

@@ -61,7 +61,7 @@ AddOrder::AddOrder(ListOfStudent *myStudents, Order* order, QWidget *parent) : Q
         {
             OrderStudent->addItem(new QListWidgetItem(order->Students[i]->ShowInfo()));
         }
-        QPushButton *cmdAdd = new QPushButton("Lj,fdbnm extybrf...");
+        QPushButton *cmdAdd = new QPushButton("Добавить ученика...");
         connect(cmdAdd, SIGNAL(clicked(bool)), SLOT(on_AddStudent_clicked()));
         connect(OrderStudent, SIGNAL(doubleClicked(QModelIndex)), SLOT(on_Student_dblclicked(QModelIndex)));
         OrderLayout->addWidget(OrderStudent, 0, 0, 3, 1);
