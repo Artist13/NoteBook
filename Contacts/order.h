@@ -19,7 +19,7 @@ public:
     std::vector<Student*> Students;
     QDateTime DateTime;
     QString Subject;
-    int Hours;
+    double Hours;
 };
 
 #endif // ORDER_H

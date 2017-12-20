@@ -40,6 +40,8 @@ bool BookOfOrder::Load(const QString inputFile)
                     tempOrder->DateTime = QDateTime::fromString(attr.value().toString(), "dd.MM.yyyy");
                 if(attr.name() == "subject")
                     tempOrder->Subject = attr.value().toString();
+                if(attr.name() == "hours")
+                    tempOrder->Hours = attr.value().toDouble();
             }
             while((xml.tokenType() != QXmlStreamReader::EndElement) || (xml.name() != "Students"))
             {
@@ -48,14 +50,6 @@ bool BookOfOrder::Load(const QString inputFile)
                     Student *tempStudent = new Student();
                     foreach (const QXmlStreamAttribute &attr, xml.attributes())
                     {
-                        /*if(attr.name() == "name")
-                            tempStudent->Name = attr.value().toString();
-                        if(attr.name() == "secondName")
-                            tempStudent->SecondName = attr.value().toString();
-                        if(attr.name() == "subject")
-                            tempStudent->Subject = attr.value().toString();
-                        if(attr.name() == "classNumber")
-                            tempStudent->ClassNumber = attr.value().toInt();*/
                         if(attr.name() == "id")
                         {
                             foreach (Student* st, AllStudents->Students)
@@ -89,17 +83,11 @@ bool BookOfOrder::Save(const QString outputFile)
         xml.writeStartElement("Order");
         xml.writeAttribute("dateTime", Orders[i]->DateTime.toString("dd.MM.yyyy"));
         xml.writeAttribute("subject", Orders[i]->Subject);
+        xml.writeAttribute("hours", QString::number(Orders[i]->Hours));
         xml.writeStartElement("Students");
         for(uint j = 0 ; j < Orders[i]->Students.size(); j++)
         {
             xml.writeStartElement("Student");
-            //xml.writeAttribute("name", Orders[i]->Students[j]->Name);
-            //xml.writeAttribute("secondName", Orders[i]->Students[j]->SecondName);
-            //xml.writeAttribute("subject", Orders[i]->Students[j]->Subject);
-            //if(Orders[i]->Students[j]->ClassNumber > 0)
-            //    xml.writeAttribute("classNumber", QString::number(Orders[i]->Students[j]->ClassNumber));
-            //else
-            //    xml.writeAttribute("classNumber", "0");
             xml.writeAttribute("id", QString::number(Orders[i]->Students[j]->ID));
             xml.writeEndElement();
         }

@@ -36,12 +36,12 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
         OrderLayout->addWidget(cbSubject, 1, 1);
         OrderLayout->addWidget(lblHours, 2, 0);
         OrderLayout->addWidget(leHours, 2, 1);
-        OrderLayout->addWidget(cmdOk, 3, 1);
-        OrderLayout->addWidget(cmdCancel, 3, 2);
+        OrderLayout->addWidget(cmdOk, 3, 0);
+        OrderLayout->addWidget(cmdCancel, 3, 1);
     }
     else
     {
-        currentOrder = new Order(order);
+        currentOrder = new Order(order);//Чтобы в конце вывести
         leDateTime->setText(order->DateTime.toString("dd.MM.yyyy"));
         cbSubject->activated(order->Subject);
         if(order->Subject == "Информатика")
@@ -131,10 +131,21 @@ void AddOrder::on_Student_dblclicked(const QModelIndex &index)
     currentOrder->Students.erase(currentOrder->Students.begin() + index.row());
     UpdateForm();
 }
+//Если дни предсталены числом состоящим из одной цифры
+QString GetValidDate(QString DateTime)
+{
+    QStringList date = DateTime.split('.');
+    if(date.first().size())
+        date.first() = '0' + date.first();
+    QString ValidDateTime = date.first() + '.' + date.at(1) + '.' + date.last();
+    return ValidDateTime;
+}
 
 Order* AddOrder::GetOrder()
 {
-    currentOrder->DateTime = QDateTime::fromString(leDateTime->text(), "dd.MM.yyyy");
+
+    currentOrder->DateTime = QDateTime::fromString(GetValidDate(leDateTime->text()), "dd.MM.yyyy");
     currentOrder->Subject = cbSubject->currentText();
+    currentOrder->Hours = leHours->text().toDouble();
     return currentOrder;
 }
