@@ -4,6 +4,7 @@
 #include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QRegExpValidator>
 
 AddStudent::AddStudent(Student *student, QWidget *parent) :
     QDialog(parent),
@@ -46,6 +47,11 @@ void AddStudent::init()
     connect(m_SecondName, SIGNAL(textChanged(QString)), SLOT(enableButton()));
     connect(m_ClassNumber, SIGNAL(textChanged(QString)), SLOT(enableButton()));
     //----------------------------------------------------------------------
+    //Проверка полей
+    connect(m_Name, SIGNAL(textChanged(QString)), SLOT(checkingName()));
+    connect(m_SecondName, SIGNAL(textChanged(QString)), SLOT(checkingSecondNmae()));
+    connect(m_ClassNumber, SIGNAL(textChanged(QString)), SLOT(checkingClassNumber()));
+    //--------------------------------------------------------------------------
     QGridLayout *Layout = new QGridLayout;
     Layout->addWidget(lblName, 0, 0);
     Layout->addWidget(m_Name, 0, 1);
@@ -71,6 +77,45 @@ void AddStudent::enableButton()
     else
     {
         cmdOk->setEnabled(true);
+    }
+}
+
+bool AddStudent::checkingName()
+{
+    if(m_Name->text().isEmpty())
+    {
+        m_Name->setStyleSheet("QLineEdit {background-color: red;}");
+    }
+    else
+    {
+        m_Name->setStyleSheet("QLineEdit {background-color: green;}");
+    }
+}
+
+bool AddStudent::checkingSecondNmae()
+{
+    if(m_SecondName->text().isEmpty())
+    {
+        m_SecondName->setStyleSheet("QLineEdit {background-color: red;}");
+    }
+    else
+    {
+        m_SecondName->setStyleSheet("QLineEdit {background-color: green;}");
+    }
+}
+
+bool AddStudent::checkingClassNumber()
+{
+    int pos = 0;
+    QRegExpValidator validator(QRegExp("[0-9][0-9]"));
+    QString classNumber = m_ClassNumber->text();
+    if((m_ClassNumber->text().isEmpty()) || validator.validate(classNumber, pos) == QValidator::Invalid)
+    {
+        m_ClassNumber->setStyleSheet("QLineEdit {background-color: red;}");
+    }
+    else
+    {
+        m_ClassNumber->setStyleSheet("QLineEdit {background-color: green;}");
     }
 }
 

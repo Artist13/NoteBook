@@ -28,6 +28,9 @@ public slots:
 
 private slots:
     void enableButton();
+    bool checkingName();
+    bool checkingSecondNmae();
+    bool checkingClassNumber();
 
 private:
     QLineEdit *m_Name;
