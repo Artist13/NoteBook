@@ -34,10 +34,18 @@ void AddStudent::init()
     QLabel *lblSecondName = new QLabel("Фамилия");
     QLabel *lblSubject = new QLabel("Предмет");
     QLabel *lblClassNumber = new QLabel("Класс");
-    QPushButton *cmdOk = new QPushButton("OK");
-    QPushButton *cmdCancel = new QPushButton("Cancel");
+    cmdOk = new QPushButton("OK");
+    //Изначально кнопка недоступна
+    cmdOk->setEnabled(false);
+
+    cmdCancel = new QPushButton("Cancel");
     connect(cmdOk, SIGNAL(clicked(bool)), SLOT(accept()));
     connect(cmdCancel, SIGNAL(clicked(bool)), SLOT(reject()));
+    //Кнопка недоступна пока поля незаполнены
+    connect(m_Name, SIGNAL(textChanged(QString)), SLOT(enableButton()));
+    connect(m_SecondName, SIGNAL(textChanged(QString)), SLOT(enableButton()));
+    connect(m_ClassNumber, SIGNAL(textChanged(QString)), SLOT(enableButton()));
+    //----------------------------------------------------------------------
     QGridLayout *Layout = new QGridLayout;
     Layout->addWidget(lblName, 0, 0);
     Layout->addWidget(m_Name, 0, 1);
@@ -52,6 +60,18 @@ void AddStudent::init()
     setLayout(Layout);
     ui->setupUi(this);
 
+}
+
+void AddStudent::enableButton()
+{
+    if((m_Name->text().isEmpty()) || (m_SecondName->text().isEmpty()) || (m_ClassNumber->text().isEmpty()))
+    {
+        cmdOk->setEnabled(false);
+    }
+    else
+    {
+        cmdOk->setEnabled(true);
+    }
 }
 
 AddStudent::~AddStudent()

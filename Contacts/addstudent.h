@@ -24,15 +24,18 @@ public:
     QString Subject() const;
     int ClassNumber() const;
     Student* GetStudent() const;
+public slots:
 
 private slots:
-
+    void enableButton();
 
 private:
     QLineEdit *m_Name;
     QLineEdit *m_SecondName;
     QLineEdit *m_ClassNumber;
     QComboBox *cbSubject;
+    QPushButton *cmdOk;
+    QPushButton *cmdCancel;
     Ui::AddStudent *ui;
 };
 

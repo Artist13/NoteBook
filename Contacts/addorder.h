@@ -23,14 +23,17 @@ private:
     QWidget *ui;
     QListWidget *OrderStudent;
     Order * currentOrder;
+    QPushButton *cmdOk;
+    QPushButton *cmdCancel;
     QLineEdit *leHours;
     void UpdateForm();
 signals:
 
-public slots:
+private slots:
     void on_AddStudent_clicked();
     void on_ListOfStudent_dbclicked(const QModelIndex &index);
     void on_Student_dblclicked(const QModelIndex &index);
+    void enableButton();
 
 };
 

@@ -21,11 +21,15 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
     leDateTime = new QLineEdit();
     QLabel *lblHours = new QLabel("Часы");
     leHours = new QLineEdit();
-    QPushButton *cmdOk = new QPushButton("OK");
-    QPushButton *cmdCancel = new QPushButton("Отмена");
+    cmdOk = new QPushButton("OK");
+    cmdOk->setEnabled(false);
+    cmdCancel = new QPushButton("Отмена");
 
     connect(cmdOk, SIGNAL(clicked(bool)), SLOT(accept()));
     connect(cmdCancel, SIGNAL(clicked(bool)), SLOT(reject()));
+    //Кнопка недоступна при незаполненых полях
+    connect(leDateTime, SIGNAL(textChanged(QString)), SLOT(enableButton()));
+    connect(leHours, SIGNAL(textChanged(QString)), SLOT(enableButton()));
     if(order == 0)
     {
         currentOrder = new Order();
@@ -77,6 +81,18 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
     }
     setLayout(OrderLayout);
     //ui->show();
+}
+
+void AddOrder::enableButton()
+{
+    if((leDateTime->text().isEmpty()) || (leHours->text().isEmpty()))
+    {
+        cmdOk->setEnabled(false);
+    }
+    else
+    {
+        cmdOk->setEnabled(true);
+    }
 }
 
 AddOrder::~AddOrder()

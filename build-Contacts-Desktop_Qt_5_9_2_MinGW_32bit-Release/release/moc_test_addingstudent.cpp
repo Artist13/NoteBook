@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'addstudent.h'
+** Meta object code from reading C++ file 'test_addingstudent.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.9.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../Contacts/addstudent.h"
+#include "../../Contacts/test_addingstudent.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'addstudent.h' doesn't include <QObject>."
+#error "The header file 'test_addingstudent.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.9.2. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,27 +20,27 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_AddStudent_t {
+struct qt_meta_stringdata_test_addingStudent_t {
     QByteArrayData data[3];
     char stringdata0[25];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_AddStudent_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_test_addingStudent_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_AddStudent_t qt_meta_stringdata_AddStudent = {
+static const qt_meta_stringdata_test_addingStudent_t qt_meta_stringdata_test_addingStudent = {
     {
-QT_MOC_LITERAL(0, 0, 10), // "AddStudent"
-QT_MOC_LITERAL(1, 11, 12), // "enableButton"
+QT_MOC_LITERAL(0, 0, 18), // "test_addingStudent"
+QT_MOC_LITERAL(1, 19, 4), // "test"
 QT_MOC_LITERAL(2, 24, 0) // ""
 
     },
-    "AddStudent\0enableButton\0"
+    "test_addingStudent\0test\0"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_AddStudent[] = {
+static const uint qt_meta_data_test_addingStudent[] = {
 
  // content:
        7,       // revision
@@ -62,41 +62,41 @@ static const uint qt_meta_data_AddStudent[] = {
        0        // eod
 };
 
-void AddStudent::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void test_addingStudent::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        AddStudent *_t = static_cast<AddStudent *>(_o);
+        test_addingStudent *_t = static_cast<test_addingStudent *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->enableButton(); break;
+        case 0: _t->test(); break;
         default: ;
         }
     }
     Q_UNUSED(_a);
 }
 
-const QMetaObject AddStudent::staticMetaObject = {
-    { &QDialog::staticMetaObject, qt_meta_stringdata_AddStudent.data,
-      qt_meta_data_AddStudent,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject test_addingStudent::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_test_addingStudent.data,
+      qt_meta_data_test_addingStudent,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *AddStudent::metaObject() const
+const QMetaObject *test_addingStudent::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *AddStudent::qt_metacast(const char *_clname)
+void *test_addingStudent::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_AddStudent.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_test_addingStudent.stringdata0))
         return static_cast<void*>(this);
-    return QDialog::qt_metacast(_clname);
+    return QObject::qt_metacast(_clname);
 }
 
-int AddStudent::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int test_addingStudent::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QDialog::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
