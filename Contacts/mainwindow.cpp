@@ -64,13 +64,19 @@ void MainWindow::on_listWidget_doubleClicked(const QModelIndex &index)
 
 void MainWindow::on_actionLoad_triggered()
 {
-    if(MyBook->Load(QFileDialog::getOpenFileName()))
+    if(MyBook->Load(QFileDialog::getOpenFileName(this,
+                                                 QString("Открыть список занятий"),
+                                                 QString(),
+                                                 QString("Список занятий(*.xml)"))))
         UpdateListOfOrder(MyBook->Orders);
 }
 
 void MainWindow::on_actionSave_triggered()
 {
-    MyBook->Save(QFileDialog::getSaveFileName());
+    MyBook->Save(QFileDialog::getSaveFileName(this,
+                                              QString("Выберите файл для сохранения"),
+                                              QString(),
+                                              QString("Список занятий(*.xml)")));
 }
 void MainWindow::UpdateListOfOrder(std::vector<Order*> orders)
 {

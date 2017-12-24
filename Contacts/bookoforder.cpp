@@ -25,56 +25,63 @@ void BookOfOrder::AddOrder(Order* order)
 
 bool BookOfOrder::Load(const QString inputFile)
 {
-    QFile *file = new QFile(inputFile);
-    if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
+    if(inputFile.isEmpty())
     {
         return false;
     }
-    Orders.clear();
-    QXmlStreamReader xml(file);
-    while(!xml.atEnd() && !xml.hasError())
+    else
     {
-        QXmlStreamReader::TokenType token = xml.readNext();
-        if(token == QXmlStreamReader::StartDocument)
-            continue;
-        if((xml.name() == "Order") && (xml.tokenType() == QXmlStreamReader::StartElement))
+        QFile *file = new QFile(inputFile);
+        if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
         {
-            Order *tempOrder = new Order();
-            foreach (const QXmlStreamAttribute &attr, xml.attributes())
+            return false;
+        }
+        Orders.clear();
+        QXmlStreamReader xml(file);
+        while(!xml.atEnd() && !xml.hasError())
+        {
+            QXmlStreamReader::TokenType token = xml.readNext();
+            if(token == QXmlStreamReader::StartDocument)
+                continue;
+            if((xml.name() == "Order") && (xml.tokenType() == QXmlStreamReader::StartElement))
             {
-                if(attr.name() == "dateTime")
-                    tempOrder->DateTime = QDateTime::fromString(attr.value().toString(), "dd.MM.yyyy");
-                if(attr.name() == "subject")
-                    tempOrder->Subject = attr.value().toString();
-                if(attr.name() == "hours")
-                    tempOrder->Hours = attr.value().toDouble();
-            }
-            while((xml.tokenType() != QXmlStreamReader::EndElement) || (xml.name() != "Students"))
-            {
-                if(xml.name() == "Student" && xml.tokenType() == QXmlStreamReader::StartElement)
+                Order *tempOrder = new Order();
+                foreach (const QXmlStreamAttribute &attr, xml.attributes())
                 {
-                    Student *tempStudent = new Student();
-                    foreach (const QXmlStreamAttribute &attr, xml.attributes())
+                    if(attr.name() == "dateTime")
+                        tempOrder->DateTime = QDateTime::fromString(attr.value().toString(), "dd.MM.yyyy");
+                    if(attr.name() == "subject")
+                        tempOrder->Subject = attr.value().toString();
+                    if(attr.name() == "hours")
+                        tempOrder->Hours = attr.value().toDouble();
+                }
+                while((xml.tokenType() != QXmlStreamReader::EndElement) || (xml.name() != "Students"))
+                {
+                    if(xml.name() == "Student" && xml.tokenType() == QXmlStreamReader::StartElement)
                     {
-                        if(attr.name() == "id")
+                        Student *tempStudent = new Student();
+                        foreach (const QXmlStreamAttribute &attr, xml.attributes())
                         {
-                            foreach (Student* st, AllStudents->Students)
+                            if(attr.name() == "id")
                             {
-                                if(st->ID == attr.value().toInt())
-                                    tempStudent = st;
+                                foreach (Student* st, AllStudents->Students)
+                                {
+                                    if(st->ID == attr.value().toInt())
+                                        tempStudent = st;
+                                }
                             }
                         }
+                        tempOrder->Students.push_back(tempStudent);
                     }
-                    tempOrder->Students.push_back(tempStudent);
+                    token = xml.readNext();
                 }
-                token = xml.readNext();
+                Orders.push_back(tempOrder);
             }
-            Orders.push_back(tempOrder);
         }
+        file->close();
+        delete file;
+        return true;
     }
-    file->close();
-    delete file;
-    return true;
 }
 
 bool BookOfOrder::Save(const QString outputFile)
