@@ -120,5 +120,5 @@ void MainWindow::on_Delete_Order_clicked()
 
 void MainWindow::on_CreateReport_clicked()
 {
-
+    MyBook->GetReport(QFileDialog::getSaveFileName());
 }

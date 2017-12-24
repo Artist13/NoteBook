@@ -13,7 +13,6 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
     ui = new QWidget();
     QGridLayout *OrderLayout = new QGridLayout(ui);
     QLabel *lblDateTime = new QLabel("Дата");
-    //Заменить String на выбор предмета из ComboBox
     cbSubject = new QComboBox();
     cbSubject->addItem("Информатика");
     cbSubject->addItem("Математика");
@@ -135,7 +134,7 @@ void AddOrder::on_Student_dblclicked(const QModelIndex &index)
 QString GetValidDate(QString DateTime)
 {
     QStringList date = DateTime.split('.');
-    if(date.first().size())
+    if(date.first().size() < 2)
         date.first() = '0' + date.first();
     QString ValidDateTime = date.first() + '.' + date.at(1) + '.' + date.last();
     return ValidDateTime;

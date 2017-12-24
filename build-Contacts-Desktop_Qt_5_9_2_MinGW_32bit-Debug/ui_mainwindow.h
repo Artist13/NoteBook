@@ -37,6 +37,7 @@ public:
     QPushButton *AddOrder;
     QPushButton *Delete_Student;
     QPushButton *Delete_Order;
+    QPushButton *CreateReport;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -70,7 +71,10 @@ public:
         Delete_Student->setGeometry(QRect(170, 410, 101, 23));
         Delete_Order = new QPushButton(centralWidget);
         Delete_Order->setObjectName(QStringLiteral("Delete_Order"));
-        Delete_Order->setGeometry(QRect(480, 410, 101, 23));
+        Delete_Order->setGeometry(QRect(420, 410, 101, 23));
+        CreateReport = new QPushButton(centralWidget);
+        CreateReport->setObjectName(QStringLiteral("CreateReport"));
+        CreateReport->setGeometry(QRect(644, 410, 101, 23));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -103,6 +107,7 @@ public:
         AddOrder->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\260\320\275\321\217\321\202\320\270\320\265", Q_NULLPTR));
         Delete_Student->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\203\321\207\320\265\320\275\320\270\320\272\320\260", Q_NULLPTR));
         Delete_Order->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\267\320\260\320\275\321\217\321\202\320\270\320\265", Q_NULLPTR));
+        CreateReport->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \320\276\321\202\321\207\320\265\321\202", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "\320\244\320\260\320\271\320\273", Q_NULLPTR));
     } // retranslateUi
 

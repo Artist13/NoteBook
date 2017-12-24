@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Orders>
-    <Order dateTime="21.11.2017" subject="Информатика">
+    <Order dateTime="21.11.2017" subject="Информатика" hours="1">
         <Students>
             <Student id="1"/>
             <Student id="2"/>
+        </Students>
+    </Order>
+    <Order dateTime="21.12.2017" subject="Информатика" hours="2">
+        <Students>
+            <Student id="1"/>
+            <Student id="2"/>
+            <Student id="4"/>
         </Students>
     </Order>
 </Orders>

@@ -1,6 +1,12 @@
 #include "bookoforder.h"
 #include <QFile>
 #include <QXmlStreamReader>
+#include <QMap>
+#include <QTextStream>
+#include <QTextDocument>
+
+#define studentID int
+#define studentAmount int
 
 BookOfOrder::BookOfOrder(ListOfStudent *myStudents)
 {
@@ -67,6 +73,7 @@ bool BookOfOrder::Load(const QString inputFile)
         }
     }
     file->close();
+    delete file;
     return true;
 }
 
@@ -97,15 +104,73 @@ bool BookOfOrder::Save(const QString outputFile)
     xml.writeEndElement();
     xml.writeEndDocument();
     file->close();
+    delete file;
     return true;
 }
 
-QString BookOfOrder::GetReport()
+void BookOfOrder::GetReport(const QString outputFile)
 {
-    QString temp = "";
-    QString tempOrder = "";
+    QMap<studentID, studentAmount> Report;
     for(int i = 0; i < Orders.size(); i++)
     {
-
+        foreach (Student* stud, Orders[i]->Students)
+        {
+            const int tempID = stud->ID;
+            if(Report.contains(tempID))
+            {
+                Report[tempID]++;
+            }
+            else
+            {
+                Report.insert(tempID, 1);
+            }
+        }
     }
+    QFile *file = new QFile(outputFile);
+    if(file->open(QIODevice::WriteOnly))
+    {
+        QTextStream writer(file);
+        //writer.setCodec("Windows-1251");
+        QString HeadOne, HeadTwo, HeadThree;
+        HeadOne = "Имя";
+        HeadTwo = "Посещаемость";
+        HeadThree = "Комментарий";
+        writer << "<html>\n";
+        writer << "<head>\n";
+        writer << "</head>\n";
+        writer << "<body>\n";
+
+        writer << "<table>\n";
+
+        writer << "<tr>\n";
+        writer << "<td>" << HeadOne << "</td>\n";
+        writer << "<td>" << HeadTwo << "</td>\n";
+        writer << "<td>" << HeadThree << "</td>\n";
+        writer << "</tr>";
+
+        foreach(Student *stud, ListOfStudent::GetListOfStudent()->Students)
+        {
+            writer << "<tr>\n";
+            QString firstColumn = stud->SecondName + " " + stud->Name;
+            writer << "<td>\n" << firstColumn << "\n</td>\n";
+            int tempAmount;
+            if(Report.contains(stud->ID))
+            {
+                tempAmount = Report.find(stud->ID).value();
+            }
+            else
+            {
+                tempAmount = 0;
+            }
+            writer << "<td>\n" << QString::number(tempAmount) << "\n</td>\n";
+            writer << "<td></td>\n";
+            writer << "</tr>\n";
+        }
+        writer << "</table>\n";
+
+        writer << "</body>\n";
+        writer << "</html>\n";
+    }
+    file->close();
+    delete file;
 }

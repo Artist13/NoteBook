@@ -13,7 +13,7 @@ public:
     void AddOrder(Order*);
     bool Load(const QString);
     bool Save(const QString);
-    QString GetReport();
+    void GetReport(const QString outputFile);
 
 
     std::vector<Order*> Orders;
