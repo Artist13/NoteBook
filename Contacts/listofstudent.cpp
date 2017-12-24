@@ -34,7 +34,7 @@ void ListOfStudent::addStudent(Student *student)
 QString ListOfStudent::ShowStudents()
 {
     QString tempInfo = "";
-    for(int i = 0; i < Students.size(); i++)
+    for(uint i = 0; i < Students.size(); i++)
     {
         tempInfo += Students[i]->ShowInfo() + "\n";
     }

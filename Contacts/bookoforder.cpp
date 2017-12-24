@@ -111,7 +111,7 @@ bool BookOfOrder::Save(const QString outputFile)
 void BookOfOrder::GetReport(const QString outputFile)
 {
     QMap<studentID, studentAmount> Report;
-    for(int i = 0; i < Orders.size(); i++)
+    for(uint i = 0; i < Orders.size(); i++)
     {
         foreach (Student* stud, Orders[i]->Students)
         {
