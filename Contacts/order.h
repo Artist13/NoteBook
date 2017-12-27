@@ -2,6 +2,7 @@
 #define ORDER_H
 
 #include "student.h"
+#include "subject.h"
 #include <vector>
 #include <QDateTime>
 #include "basetype.h"
@@ -18,7 +19,8 @@ public:
     BaseType *TypeSubject;
     std::vector<Student*> Students;
     QDateTime DateTime;
-    QString Subject;
+    Subject OrderSubject;
+    //QString Subject;
     double Hours;
 };
 

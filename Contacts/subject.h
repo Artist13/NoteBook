@@ -3,6 +3,7 @@
 
 #include <QString>
 
+
 class Subject
 {
 public:

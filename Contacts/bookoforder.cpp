@@ -51,7 +51,12 @@ bool BookOfOrder::Load(const QString inputFile)
                     if(attr.name() == "dateTime")
                         tempOrder->DateTime = QDateTime::fromString(attr.value().toString(), "dd.MM.yyyy");
                     if(attr.name() == "subject")
-                        tempOrder->Subject = attr.value().toString();
+                    {
+                        QStringList subject = attr.value().toString().split(' ');
+                        tempOrder->OrderSubject.Name = subject.first();
+                        QString classNumber = subject.last();
+                        tempOrder->OrderSubject.ClassNumber = classNumber.toInt();
+                    }
                     if(attr.name() == "hours")
                         tempOrder->Hours = attr.value().toDouble();
                 }
@@ -96,7 +101,7 @@ bool BookOfOrder::Save(const QString outputFile)
     {
         xml.writeStartElement("Order");
         xml.writeAttribute("dateTime", Orders[i]->DateTime.toString("dd.MM.yyyy"));
-        xml.writeAttribute("subject", Orders[i]->Subject);
+        xml.writeAttribute("subject", Orders[i]->OrderSubject.Name + " " + QString::number(Orders[i]->OrderSubject.ClassNumber));
         xml.writeAttribute("hours", QString::number(Orders[i]->Hours));
         xml.writeStartElement("Students");
         for(uint j = 0 ; j < Orders[i]->Students.size(); j++)

@@ -19,10 +19,10 @@ public:
     explicit AddStudent(Student* student = 0, QWidget *parent = 0);
     void init();
     ~AddStudent();
-    QString Name() const;
-    QString SecondName() const;
-    QString Subject() const;
-    int ClassNumber() const;
+    QString GetName() const;
+    QString GetSecondName() const;
+    Subject GetSubject() const;
+    int GetClassNumber() const;
     Student* GetStudent() const;
 public slots:
 

@@ -95,7 +95,7 @@ void ListOfSubjects::Save(const QString outputFile)
     xml.setAutoFormatting(true);
     xml.writeStartDocument();
     xml.writeStartElement("Subjects");
-    for(uint i = 0; i < Subjects.size(); i++)
+    for(int i = 0; i < Subjects.size(); i++)
     {
         addSubjectToXml(Subjects[i], xml);
     }

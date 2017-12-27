@@ -1,19 +1,20 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 #include "persone.h"
+#include "listofsubjects.h"
 
 class Student : public Persone
 {
 public:
     Student();
-    Student(QString, QString);
-    Student(QString, QString, QString, int);
+    Student(QString name, QString secondName);
+    Student(QString name, QString secondName, Subject studentSubject, int classNumber);
     QString ShowInfo();
     ~Student();
 
     Student* operator =(Student*);
 
-    QString Subject;
+    Subject StudentSubject;
     int ClassNumber;
 };
 

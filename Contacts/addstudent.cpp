@@ -6,6 +6,10 @@
 #include <QPushButton>
 #include <QRegExpValidator>
 
+
+
+#define MySubjects ListOfSubjects::GetListOfSubject()->Subjects
+
 AddStudent::AddStudent(Student *student, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddStudent)
@@ -16,7 +20,7 @@ AddStudent::AddStudent(Student *student, QWidget *parent) :
     {
         m_Name->setText(student->Name);
         m_SecondName->setText(student->SecondName);
-        cbSubject->activated(student->Subject);
+        cbSubject->activated(student->StudentSubject.Name + " " + QString::number(student->StudentSubject.ClassNumber));
         if(student->ClassNumber > 0)
             m_ClassNumber->setText(QString::number(student->ClassNumber));
     }
@@ -27,9 +31,13 @@ void AddStudent::init()
     m_Name  = new QLineEdit;
     m_SecondName = new QLineEdit;
     cbSubject = new QComboBox();
-    cbSubject->addItem("Информатика");
-    cbSubject->addItem("Математика");
-    cbSubject->addItem("Планшеты");
+    foreach (Subject subj, MySubjects)
+    {
+        cbSubject->addItem(subj.Name + " " + subj.ClassNumber);
+    }
+    //cbSubject->addItem("Информатика");
+    //cbSubject->addItem("Математика");
+    //cbSubject->addItem("Планшеты");
     m_ClassNumber = new QLineEdit;
     QLabel *lblName = new QLabel("Имя");
     QLabel *lblSecondName = new QLabel("Фамилия");
@@ -134,27 +142,31 @@ AddStudent::~AddStudent()
     delete ui;
 }
 
-QString AddStudent::Name() const
+QString AddStudent::GetName() const
 {
     return m_Name->text();
 }
 
-QString AddStudent::SecondName() const
+QString AddStudent::GetSecondName() const
 {
     return m_SecondName->text();
 }
 
-QString AddStudent::Subject() const
+Subject AddStudent::GetSubject() const
 {
-    return cbSubject->currentText();
+    foreach (Subject subj, MySubjects)
+    {
+        if((subj.Name + " " + QString::number(subj.ClassNumber)) == cbSubject->currentText())
+            return subj;
+    }
 }
 
-int AddStudent::ClassNumber() const
+int AddStudent::GetClassNumber() const
 {
     return m_ClassNumber->text().toInt();
 }
 
 Student* AddStudent::GetStudent() const
 {
-    return new Student(Name(), SecondName(), Subject(), ClassNumber());
+    return new Student(GetName(), GetSecondName(), GetSubject(), GetClassNumber());
 }

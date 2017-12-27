@@ -4,8 +4,10 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include "addstudent.h"
+#include "listofsubjects.h"
 
 #define MyStudents ListOfStudent::GetListOfStudent()->Students
+#define MySubjects ListOfSubjects::GetListOfSubject()->Subjects
 
 //
 AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
@@ -14,9 +16,13 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
     QGridLayout *OrderLayout = new QGridLayout(ui);
     QLabel *lblDateTime = new QLabel("Дата");
     cbSubject = new QComboBox();
-    cbSubject->addItem("Информатика");
-    cbSubject->addItem("Математика");
-    cbSubject->addItem("Плашеты");
+    foreach (Subject subj, MySubjects)
+    {
+        cbSubject->addItem(subj.Name + " " + QString::number(subj.ClassNumber));
+    }
+    //cbSubject->addItem("Информатика");
+    //cbSubject->addItem("Математика");
+    //cbSubject->addItem("Плашеты");
     QLabel *lblSubject = new QLabel("Предмет");
     leDateTime = new QLineEdit();
     QLabel *lblHours = new QLabel("Часы");
@@ -46,8 +52,8 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
     {
         currentOrder = new Order(order);//Чтобы в конце вывести
         leDateTime->setText(order->DateTime.toString("dd.MM.yyyy"));
-        cbSubject->activated(order->Subject);
-        if(order->Subject == "Информатика")
+        cbSubject->activated(order->OrderSubject.Name + " " + QString::number(order->OrderSubject.ClassNumber));
+       /* if(order->Subject == "Информатика")
         {
             cbSubject->activated("Информатика");
         }
@@ -58,7 +64,7 @@ AddOrder::AddOrder(Order* order, QWidget *parent) : QDialog(parent)
         if(order->Subject == "Планшеты")
         {
             cbSubject->activated("Планшеты");
-        }
+        }*/
         leHours->setText(QString::number(order->Hours));
         OrderStudent = new QListWidget(this);
         for(uint i = 0; i < order->Students.size(); i++)
@@ -103,7 +109,7 @@ AddOrder::~AddOrder()
 void AddOrder::UpdateForm()
 {
     leDateTime->setText(currentOrder->DateTime.toString("dd.MM.yyyy"));
-    cbSubject->activated(currentOrder->Subject);
+    cbSubject->activated(currentOrder->OrderSubject.Name + " " + QString::number(currentOrder->OrderSubject.ClassNumber));
     OrderStudent->clear();
     for(uint i = 0; i < currentOrder->Students.size(); i++)
     {
@@ -160,7 +166,10 @@ Order* AddOrder::GetOrder()
 {
 
     currentOrder->DateTime = QDateTime::fromString(GetValidDate(leDateTime->text()), "dd.MM.yyyy");
-    currentOrder->Subject = cbSubject->currentText();
+    QStringList subject = cbSubject->currentText().split(' ');
+    currentOrder->OrderSubject.Name = subject.first();
+    QString classNumber = subject.last();
+    currentOrder->OrderSubject.ClassNumber = classNumber.toInt();
     currentOrder->Hours = leHours->text().toDouble();
     return currentOrder;
 }

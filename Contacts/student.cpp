@@ -10,9 +10,9 @@ Student::Student(QString name, QString secondName) : Persone(name, secondName)
     ClassNumber = 0;
 }
 
-Student::Student(QString name, QString secondName, QString subject, int classNumber) : Persone(name, secondName)
+Student::Student(QString name, QString secondName, Subject studentSubject, int classNumber) : Persone(name, secondName)
 {
-    Subject = subject;
+    StudentSubject = studentSubject;
     ClassNumber = classNumber;
 }
 
@@ -24,7 +24,7 @@ Student::~Student()
 QString Student::ShowInfo()
 {
     QString tempInfo = "";
-    tempInfo = SecondName + "   " + Name + "   " + Subject;
+    tempInfo = SecondName + "   " + Name + "   " + StudentSubject.Name + " " + StudentSubject.ClassNumber;
     if(ClassNumber > 0)
     {
         tempInfo += "   " + QString::number(ClassNumber);
@@ -36,7 +36,7 @@ Student* Student::operator =(Student *student)
 {
     this->Name = student->Name;
     this->SecondName = student->SecondName;
-    this->Subject = student->Subject;
+    this->StudentSubject = student->StudentSubject;
     this->ClassNumber = student->ClassNumber;
     return this;
 }

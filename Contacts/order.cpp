@@ -8,7 +8,7 @@ Order::Order()
 Order::Order(Order* myOrder)
 {
     this->DateTime = myOrder->DateTime;
-    this->Subject = myOrder->Subject;
+    this->OrderSubject = myOrder->OrderSubject;
     foreach (Student* st, myOrder->Students)
     {
         this->Students.push_back(st);
@@ -32,6 +32,6 @@ QString Order::ShowInfo()
 {
     QString tempInfo = "";
     tempInfo += DateTime.toString("dd.MM.yyyy");
-    tempInfo += "   " + Subject;
+    tempInfo += "   " + OrderSubject.Name + " " + QString::number(OrderSubject.ClassNumber);
     return tempInfo;
 }

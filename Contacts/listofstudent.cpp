@@ -65,7 +65,12 @@ bool ListOfStudent::Load(const QString inputFile)
                 if(attr.name() == "secondName")
                     tempStudent->SecondName = attr.value().toString();
                 if(attr.name() == "subject")
-                    tempStudent->Subject = attr.value().toString();
+                {
+                    QStringList subject = attr.value().toString().split(' ');
+                    tempStudent->StudentSubject.Name = subject.first();
+                    QString classNumber = subject.last();
+                    tempStudent->StudentSubject.ClassNumber = classNumber.toInt();
+                }
                 if(attr.name() == "classNumber")
                     tempStudent->ClassNumber = attr.value().toInt();
                 if(attr.name() == "id")
@@ -87,7 +92,7 @@ void addStudentToXml(Student* student, QXmlStreamWriter &xml)
     xml.writeStartElement("Student");
     xml.writeAttribute("name", student->Name);
     xml.writeAttribute("secondName", student->SecondName);
-    xml.writeAttribute("subject", student->Subject);
+    xml.writeAttribute("subject", student->StudentSubject.Name + " " + QString::number(student->StudentSubject.ClassNumber));
     if(student->ClassNumber > 0)
         xml.writeAttribute("classNumber", QString::number(student->ClassNumber));
     else
