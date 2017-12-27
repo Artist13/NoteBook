@@ -13,6 +13,8 @@ public:
     void AddSubject(Subject subject);
     int Size();
     QVector<Subject> Subjects;
+    void Load(const QString);
+    void Save(const QString);
 private:
     ListOfSubjects();
 

@@ -3,6 +3,8 @@
 #include "addsubject.h"
 #include "listofsubjects.h"
 
+#define MySubjects ListOfSubjects::GetListOfSubject()
+
 SubjectsWidget::SubjectsWidget(QWidget *parent) : QDialog(parent)
 {
     this->setMinimumHeight(400);
@@ -20,11 +22,13 @@ SubjectsWidget::SubjectsWidget(QWidget *parent) : QDialog(parent)
     MyLayout->addWidget(cmdAddSubject, 1,0,1,1);
     MyLayout->addWidget(cmdClose, 1, 1, 1, 1);
 
+    UpdateList();
 }
 
 void SubjectsWidget::UpdateList()
 {
-    foreach (Subject subj, ListOfSubjects::GetListOfSubject()->Subjects)
+    MyListOfSubjects->clear();
+    foreach (Subject subj, MySubjects->Subjects)
     {
         MyListOfSubjects->addItem(new QListWidgetItem(subj.GetName() + " " + QString::number(subj.GetClassNumber())));
     }
@@ -35,7 +39,7 @@ void SubjectsWidget::on_add_subject_clicked()
     AddSubject* addSubject = new AddSubject();
     if(addSubject->exec() == QDialog::Accepted)
     {
-        ListOfSubjects::GetListOfSubject()->AddSubject(addSubject->GetSubject());
+        MySubjects->AddSubject(addSubject->GetSubject());
     }
     UpdateList();
     delete addSubject;
@@ -46,7 +50,12 @@ void SubjectsWidget::on_close_clicked()
 
 }
 
-void SubjectsWidget::on_subject_dbl_clicked(QModelIndex)
+void SubjectsWidget::on_subject_dbl_clicked(QModelIndex index)
 {
-
+    if(!index.isValid())
+    {
+        return;
+    }
+    MySubjects->Subjects.erase(MySubjects->Subjects.begin() + index.row(), MySubjects->Subjects.begin() + index.row() + 1);
+    UpdateList();
 }

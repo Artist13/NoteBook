@@ -12,10 +12,11 @@ public:
     int GetPrice();
     QString GetName();
     int GetClassNumber();
-private:
     QString Name;
     int Price;
     int ClassNumber;
+private:
+
 };
 
 #endif // SUBJECT_H

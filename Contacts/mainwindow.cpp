@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "addstudent.h"
 #include "addorder.h"
+#include "listofsubjects.h"
 #include "subjectswidget.h"
 
 #include <QWidget>
@@ -11,6 +12,7 @@
 #include <QVBoxLayout>
 
 #define MyStudents ListOfStudent::GetListOfStudent()
+//#define ListOfSubjects ListOfSubjects::GetListOfSubject()
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,12 +21,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     MyBook = new BookOfOrder(MyStudents);
     MyStudents->Load("TestStudents.xml");
+    ListOfSubjects::GetListOfSubject()->Load("TestSubjects.xml");
     UpdateList(MyStudents->Students);
 }
 
 MainWindow::~MainWindow()
 {
     MyStudents->Save("TestStudents.xml");
+    ListOfSubjects::GetListOfSubject()->Save("TestSubjects.xml");
     delete MyBook;
     delete ui;
 }
