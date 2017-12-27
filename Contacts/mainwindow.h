@@ -41,6 +41,8 @@ private slots:
 
     void on_CreateReport_clicked();
 
+    void on_action_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

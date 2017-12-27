@@ -35,6 +35,10 @@ SOURCES += \
     addorder.cpp \
     basetype.cpp \
     informat.cpp \
+    subject.cpp \
+    listofsubjects.cpp \
+    subjectswidget.cpp \
+    addsubject.cpp
 
 
 HEADERS += \
@@ -48,6 +52,10 @@ HEADERS += \
     addorder.h \
     basetype.h \
     informat.h \
+    subject.h \
+    listofsubjects.h \
+    subjectswidget.h \
+    addsubject.h
 
 FORMS += \
         mainwindow.ui \

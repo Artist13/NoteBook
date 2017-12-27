@@ -85,10 +85,12 @@ bool AddStudent::checkingName()
     if(m_Name->text().isEmpty())
     {
         m_Name->setStyleSheet("QLineEdit {background-color: red;}");
+        return false;
     }
     else
     {
         m_Name->setStyleSheet("QLineEdit {background-color: green;}");
+        return true;
     }
 }
 
@@ -97,10 +99,12 @@ bool AddStudent::checkingSecondNmae()
     if(m_SecondName->text().isEmpty())
     {
         m_SecondName->setStyleSheet("QLineEdit {background-color: red;}");
+        return false;
     }
     else
     {
         m_SecondName->setStyleSheet("QLineEdit {background-color: green;}");
+        return true;
     }
 }
 
@@ -112,10 +116,12 @@ bool AddStudent::checkingClassNumber()
     if((m_ClassNumber->text().isEmpty()) || validator.validate(classNumber, pos) == QValidator::Invalid)
     {
         m_ClassNumber->setStyleSheet("QLineEdit {background-color: red;}");
+        return false;
     }
     else
     {
         m_ClassNumber->setStyleSheet("QLineEdit {background-color: green;}");
+        return true;
     }
 }
 

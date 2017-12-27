@@ -2,7 +2,9 @@
 #include "ui_mainwindow.h"
 #include "addstudent.h"
 #include "addorder.h"
+#include "subjectswidget.h"
 
+#include <QWidget>
 #include <QMessageBox>
 #include <QMenuBar>
 #include <QFileDialog>
@@ -127,4 +129,10 @@ void MainWindow::on_Delete_Order_clicked()
 void MainWindow::on_CreateReport_clicked()
 {
     MyBook->GetReport(QFileDialog::getSaveFileName());
+}
+
+void MainWindow::on_action_triggered()
+{
+    SubjectsWidget *MySubjects = new SubjectsWidget(this);
+    MySubjects->show();
 }

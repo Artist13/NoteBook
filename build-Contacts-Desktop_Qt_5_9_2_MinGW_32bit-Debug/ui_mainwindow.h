@@ -30,6 +30,7 @@ class Ui_MainWindow
 public:
     QAction *actionLoad;
     QAction *actionSave;
+    QAction *action;
     QWidget *centralWidget;
     QPushButton *AddPerson;
     QListWidget *listWidget;
@@ -40,6 +41,7 @@ public:
     QPushButton *CreateReport;
     QMenuBar *menuBar;
     QMenu *menuFile;
+    QMenu *menu;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -52,6 +54,8 @@ public:
         actionLoad->setObjectName(QStringLiteral("actionLoad"));
         actionSave = new QAction(MainWindow);
         actionSave->setObjectName(QStringLiteral("actionSave"));
+        action = new QAction(MainWindow);
+        action->setObjectName(QStringLiteral("action"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         AddPerson = new QPushButton(centralWidget);
@@ -81,6 +85,8 @@ public:
         menuBar->setGeometry(QRect(0, 0, 768, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
+        menu = new QMenu(menuBar);
+        menu->setObjectName(QStringLiteral("menu"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -90,8 +96,10 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menu->menuAction());
         menuFile->addAction(actionLoad);
         menuFile->addAction(actionSave);
+        menu->addAction(action);
 
         retranslateUi(MainWindow);
 
@@ -103,12 +111,14 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         actionLoad->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\263\321\200\321\203\320\267\320\270\321\202\321\214", Q_NULLPTR));
         actionSave->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        action->setText(QApplication::translate("MainWindow", "\320\237\321\200\320\265\320\264\320\274\320\265\321\202\321\213", Q_NULLPTR));
         AddPerson->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\203\321\207\320\265\320\275\320\270\320\272\320\260", Q_NULLPTR));
         AddOrder->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \320\267\320\260\320\275\321\217\321\202\320\270\320\265", Q_NULLPTR));
         Delete_Student->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\203\321\207\320\265\320\275\320\270\320\272\320\260", Q_NULLPTR));
         Delete_Order->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \320\267\320\260\320\275\321\217\321\202\320\270\320\265", Q_NULLPTR));
         CreateReport->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \320\276\321\202\321\207\320\265\321\202", Q_NULLPTR));
         menuFile->setTitle(QApplication::translate("MainWindow", "\320\244\320\260\320\271\320\273", Q_NULLPTR));
+        menu->setTitle(QApplication::translate("MainWindow", "\320\235\320\260\321\201\321\202\321\200\320\276\320\271\320\272\320\270", Q_NULLPTR));
     } // retranslateUi
 
 };
