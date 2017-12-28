@@ -11,6 +11,7 @@ public:
     static ListOfStudent *GetListOfStudent();
     QString ShowStudents();
     void addStudent(Student*);
+    void addStudent(Student *, int id);
     bool Load(const QString);
     bool Save(const QString);
 

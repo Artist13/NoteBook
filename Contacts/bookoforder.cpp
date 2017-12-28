@@ -45,21 +45,28 @@ bool BookOfOrder::Load(const QString inputFile)
                 continue;
             if((xml.name() == "Order") && (xml.tokenType() == QXmlStreamReader::StartElement))
             {
-                Order *tempOrder = new Order();
+                //Order *tempOrder = new Order();
+                QDateTime currentDateTime;
+                Subject currentSubject;
+                double currentHours;
                 foreach (const QXmlStreamAttribute &attr, xml.attributes())
                 {
                     if(attr.name() == "dateTime")
-                        tempOrder->DateTime = QDateTime::fromString(attr.value().toString(), "dd.MM.yyyy");
+                        currentDateTime = QDateTime::fromString(attr.value().toString(), "dd.MM.yyyy");
                     if(attr.name() == "subject")
                     {
+                        QString subjectName;
+                        int subjectClassNumber;
                         QStringList subject = attr.value().toString().split(' ');
-                        tempOrder->OrderSubject.Name = subject.first();
+                        subjectName = subject.first();
                         QString classNumber = subject.last();
-                        tempOrder->OrderSubject.ClassNumber = classNumber.toInt();
+                        subjectClassNumber = classNumber.toInt();
+                        currentSubject = Subject(subjectName, subjectClassNumber, 0);
                     }
                     if(attr.name() == "hours")
-                        tempOrder->Hours = attr.value().toDouble();
+                        currentHours = attr.value().toDouble();
                 }
+                std::vector<Student*> currentStudents;
                 while((xml.tokenType() != QXmlStreamReader::EndElement) || (xml.name() != "Students"))
                 {
                     if(xml.name() == "Student" && xml.tokenType() == QXmlStreamReader::StartElement)
@@ -76,11 +83,11 @@ bool BookOfOrder::Load(const QString inputFile)
                                 }
                             }
                         }
-                        tempOrder->Students.push_back(tempStudent);
+                        currentStudents.push_back(tempStudent);
                     }
                     token = xml.readNext();
                 }
-                Orders.push_back(tempOrder);
+                AddOrder(new Order(currentDateTime, currentSubject, currentHours, currentStudents));
             }
         }
         file->close();

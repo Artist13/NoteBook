@@ -26,3 +26,11 @@ int Subject::GetPrice()
 {
     return Price;
 }
+
+QString Subject::GetInfo()
+{
+    QString temp = Name;
+    if(ClassNumber != 0)
+        temp += " " + QString::number(ClassNumber);
+    return temp;
+}

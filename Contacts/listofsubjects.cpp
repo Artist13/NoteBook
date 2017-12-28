@@ -59,17 +59,20 @@ void ListOfSubjects::Load(const QString inputFile)
             continue;
         if((xml.name() == "Subject") && (xml.attributes().size() > 0))
         {
-            Subject currentSubject = Subject();
+            //Subject currentSubject = Subject();
+            QString currentName;
+            int currentClassNumber;
+            int currentPrice;
             foreach (const QXmlStreamAttribute &attr, xml.attributes())
             {
                 if(attr.name() == "name")
-                    currentSubject.Name = attr.value().toString();
+                    currentName = attr.value().toString();
                 if(attr.name() == "classNumber")
-                    currentSubject.ClassNumber = attr.value().toInt();
+                    currentClassNumber = attr.value().toInt();
                 if(attr.name() == "price")
-                    currentSubject.Price = attr.value().toInt();
+                    currentPrice = attr.value().toInt();
             }
-            Subjects.push_back(currentSubject);
+            Subjects.push_back(Subject(currentName, currentClassNumber, currentPrice));
         }
     }
     file->close();
@@ -78,9 +81,9 @@ void ListOfSubjects::Load(const QString inputFile)
 void addSubjectToXml(Subject subject, QXmlStreamWriter &xml)
 {
     xml.writeStartElement("Subject");
-    xml.writeAttribute("name", subject.Name);
-    xml.writeAttribute("classNumber", QString::number(subject.ClassNumber));
-    xml.writeAttribute("price", QString::number(subject.Price));
+    xml.writeAttribute("name", subject.GetName());
+    xml.writeAttribute("classNumber", QString::number(subject.GetClassNumber()));
+    xml.writeAttribute("price", QString::number(subject.GetPrice()));
     xml.writeEndElement();
 }
 

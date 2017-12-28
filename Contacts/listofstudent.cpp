@@ -31,6 +31,12 @@ void ListOfStudent::addStudent(Student *student)
     Students.push_back(student);
 }
 
+void ListOfStudent::addStudent(Student *student, int id)
+{
+    student->SetID(id);
+    Students.push_back(student);
+}
+
 QString ListOfStudent::ShowStudents()
 {
     QString tempInfo = "";
@@ -57,29 +63,37 @@ bool ListOfStudent::Load(const QString inputFile)
             continue;
         if((xml.name() == "Student") && (xml.attributes().size() > 0))
         {
-            Student *tempStudent = new Student();
+            //Student *tempStudent = new Student();
+            QString currentName, currentSecondName;
+            Subject currentSubject;
+            int currentClassNumber;
+            int currentID;
             foreach (const QXmlStreamAttribute &attr, xml.attributes())
             {
                 if(attr.name() == "name")
-                    tempStudent->Name = attr.value().toString();
+                    currentName = attr.value().toString();
                 if(attr.name() == "secondName")
-                    tempStudent->SecondName = attr.value().toString();
+                    currentSecondName = attr.value().toString();
                 if(attr.name() == "subject")
                 {
+                    QString subjectName;
+                    int subjectClassNumber;
                     QStringList subject = attr.value().toString().split(' ');
-                    tempStudent->StudentSubject.Name = subject.first();
+                    subjectName = subject.first();
                     QString classNumber = subject.last();
-                    tempStudent->StudentSubject.ClassNumber = classNumber.toInt();
+                    subjectClassNumber = classNumber.toInt();
+                    currentSubject = Subject(subjectName, subjectClassNumber, 0);
                 }
                 if(attr.name() == "classNumber")
-                    tempStudent->ClassNumber = attr.value().toInt();
+                    currentClassNumber = attr.value().toInt();
                 if(attr.name() == "id")
                 {
-                    tempStudent->ID = attr.value().toInt();
+                    currentID = attr.value().toInt();
                     last_id = attr.value().toInt();
                 }
             }
-            Students.push_back(tempStudent);
+            addStudent(new Student(currentName, currentSecondName, currentSubject, currentClassNumber), currentID);
+
         }
     }
     file->close();
@@ -92,7 +106,7 @@ void addStudentToXml(Student* student, QXmlStreamWriter &xml)
     xml.writeStartElement("Student");
     xml.writeAttribute("name", student->Name);
     xml.writeAttribute("secondName", student->SecondName);
-    xml.writeAttribute("subject", student->StudentSubject.Name + " " + QString::number(student->StudentSubject.ClassNumber));
+    xml.writeAttribute("subject", student->StudentSubject.GetInfo());
     if(student->ClassNumber > 0)
         xml.writeAttribute("classNumber", QString::number(student->ClassNumber));
     else

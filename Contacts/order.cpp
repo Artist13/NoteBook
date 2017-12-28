@@ -15,6 +15,11 @@ Order::Order(Order* myOrder)
     }
 }
 
+Order::Order(QDateTime datetime, Subject subject, double hours, std::vector<Student *> students) : DateTime(datetime), OrderSubject(subject), Hours(hours), Students(students)
+{
+
+}
+
 void Order::AddStudent(Student* student)
 {
     Students.push_back(student);

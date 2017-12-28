@@ -12,6 +12,7 @@ class Order
 public:
     Order();
     Order(Order*);
+    Order(QDateTime, Subject, double hours, std::vector<Student*> students);
     QString ShowInfo();
     void AddStudent(Student*);
     int Price();
