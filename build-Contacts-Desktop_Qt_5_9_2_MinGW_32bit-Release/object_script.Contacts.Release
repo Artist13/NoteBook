@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\persone.o
+./release\student.o
+./release\bookoforder.o
+./release\addstudent.o
+./release\listofstudent.o
+./release\order.o
+./release\addorder.o
+./release\basetype.o
+./release\informat.o
+./release\moc_mainwindow.o
+./release\moc_addstudent.o
+./release\moc_addorder.o
+);

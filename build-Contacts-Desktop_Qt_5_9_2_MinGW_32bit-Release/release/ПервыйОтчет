@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Orders>
+    <Order dateTime="21.11.2017" subject="Информатика" hours="1">
+        <Students/>
+    </Order>
+</Orders>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Subjects>
+    <Subject name="Информатика" classNumber="11" price="300"/>
+    <Subject name="Математика" classNumber="9" price="300"/>
+    <Subject name="Математика" classNumber="11" price="300"/>
+    <Subject name="Планшеты" classNumber="0" price="300"/>
+    <Subject name="Информатика" classNumber="9" price="300"/>
+</Subjects>

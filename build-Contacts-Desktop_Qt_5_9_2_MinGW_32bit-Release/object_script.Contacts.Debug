@@ -1,0 +1,16 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\persone.o
+./debug\student.o
+./debug\bookoforder.o
+./debug\addstudent.o
+./debug\listofstudent.o
+./debug\order.o
+./debug\addorder.o
+./debug\basetype.o
+./debug\informat.o
+./debug\moc_mainwindow.o
+./debug\moc_addstudent.o
+./debug\moc_addorder.o
+);
