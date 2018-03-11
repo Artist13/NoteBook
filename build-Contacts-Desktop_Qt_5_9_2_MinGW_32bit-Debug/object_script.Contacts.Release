@@ -10,7 +10,13 @@ INPUT(
 ./release\addorder.o
 ./release\basetype.o
 ./release\informat.o
+./release\subject.o
+./release\listofsubjects.o
+./release\subjectswidget.o
+./release\addsubject.o
 ./release\moc_mainwindow.o
 ./release\moc_addstudent.o
 ./release\moc_addorder.o
+./release\moc_subjectswidget.o
+./release\moc_addsubject.o
 );

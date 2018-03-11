@@ -1,3 +1,6 @@
+/*
+ * Базовый класс для ученика
+ */
 #ifndef PERSONE_H
 #define PERSONE_H
 #include <QString>
@@ -9,12 +12,12 @@ public:
     Persone();
     Persone(QString, QString);
     ~Persone();
-    QString ShowInfo();
-    void SetID(int);
+    QString ShowInfo();//Передает объект для отображения в программе
+    void SetID(int);//Устанавливает указаннй ID
 
-    QString Name;
-    QString SecondName;
-    int ID;
+    QString Name;//Имя
+    QString SecondName;//Фамилия
+    int ID;//Должно быть скрыто в private. Иначе зачем SetID
 };
 
 #endif // PERSONE_H

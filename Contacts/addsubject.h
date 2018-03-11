@@ -1,3 +1,7 @@
+/*
+ * Объект для добавления/изменения предмета
+ * Описание предметов хранится в xml файле(ах)
+ */
 #ifndef ADDSUBJECT_H
 #define ADDSUBJECT_H
 
@@ -20,14 +24,14 @@ signals:
 
 public slots:
 private:
-    QString Name();
-    int ClassNumber();
-    int Price();
-    QLineEdit *NameOfSubject;
-    QLineEdit *PriceOfSubject;
-    QLineEdit *ClassOfSubject;
-    QPushButton *cmdOk;
-    QPushButton *cmdClose;
+    QString Name();//Название предмета
+    int ClassNumber();//Каждый предмет рассчитан на опреленый класс
+    int Price();//Цена за 1 час проведения занятия
+    QLineEdit *NameOfSubject;//Поле для названия
+    QLineEdit *PriceOfSubject;//Поле для ввода цены
+    QLineEdit *ClassOfSubject;//Поле для ввода номера класса
+    QPushButton *cmdOk;//Кнопка подтверждения
+    QPushButton *cmdClose;//Кнопка отмены
 };
 
 #endif // ADDSUBJECT_H

@@ -108,7 +108,7 @@ bool BookOfOrder::Save(const QString outputFile)
     {
         xml.writeStartElement("Order");
         xml.writeAttribute("dateTime", Orders[i]->DateTime.toString("dd.MM.yyyy"));
-        xml.writeAttribute("subject", Orders[i]->OrderSubject.Name + " " + QString::number(Orders[i]->OrderSubject.ClassNumber));
+        xml.writeAttribute("subject", Orders[i]->OrderSubject.GetInfo());
         xml.writeAttribute("hours", QString::number(Orders[i]->Hours));
         xml.writeStartElement("Students");
         for(uint j = 0 ; j < Orders[i]->Students.size(); j++)

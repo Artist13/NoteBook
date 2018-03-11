@@ -10,7 +10,13 @@ INPUT(
 ./debug\addorder.o
 ./debug\basetype.o
 ./debug\informat.o
+./debug\subject.o
+./debug\listofsubjects.o
+./debug\subjectswidget.o
+./debug\addsubject.o
 ./debug\moc_mainwindow.o
 ./debug\moc_addstudent.o
 ./debug\moc_addorder.o
+./debug\moc_subjectswidget.o
+./debug\moc_addsubject.o
 );

@@ -1,3 +1,6 @@
+/*
+ * Класс описывающий виджет спискаа предметов???
+ */
 #ifndef SUBJECTSWIDGET_H
 #define SUBJECTSWIDGET_H
 
